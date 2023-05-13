@@ -1,0 +1,31 @@
+a = []
+ingredient = {}
+result = ""
+
+with open("file 1.txt", "r") as file:
+    for line in file:
+        a.append(line.strip())
+
+for i in range(len(a)):
+    deistv = a[i].split()
+    if deistv[0] == "MIX":
+        ingredient[str(i)] = "".join(deistv[1:])
+        result += "MX" + ingredient[str(i)] + "XM"
+    elif deistv[0] == "WATER":
+        ingredient[str(i)] = "".join(deistv[1:])
+        result += "WT" + ingredient[str(i)] + "TW"
+    elif deistv[0] == "DUST":
+        ingredient[str(i)] = "".join(deistv[1:])
+        result += "DT" + ingredient[str(i)] + "TD"
+    elif deistv[0] == "FIRE":
+        ingredients_list = []
+        for ingred in deistv[1:]:
+            if ingred.isdigit():
+                ingredients_list.append(ingredient[ingred])
+            else:
+                ingredients_list.append(ingred)
+        ingredient[str(i)] = "".join(ingredients_list)
+        result += "FR" + ingredient[str(i)] + "RF"
+
+with open("file 2.txt", "w") as file:
+    file.write(result)
